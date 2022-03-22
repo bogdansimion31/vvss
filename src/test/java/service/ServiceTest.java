@@ -39,4 +39,19 @@ public class ServiceTest {
         Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
         assertEquals(service.saveStudent("01","nume1",1),1);
     }
+
+    @Test
+    public void updateStudent() {
+        Validator<Student> studentValidator = new StudentValidator();
+        Validator<Tema> temaValidator = new TemaValidator();
+        Validator<Nota> notaValidator = new NotaValidator();
+
+        StudentXMLRepository fileRepository1 = new StudentXMLRepository(studentValidator, "studenti.xml");
+        TemaXMLRepository fileRepository2 = new TemaXMLRepository(temaValidator, "teme.xml");
+        NotaXMLRepository fileRepository3 = new NotaXMLRepository(notaValidator, "note.xml");
+
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        assertEquals(service.saveStudent("01","nume1",1),1);
+        assertEquals(service.updateStudent("01","nume12",1),0);
+    }
 }
